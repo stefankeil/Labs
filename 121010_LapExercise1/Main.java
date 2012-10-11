@@ -1,3 +1,4 @@
+//test
 import java.io.*;
 
 //Ich fands übersichtlicher eine eigene Main zu haben, hier brauchen wir noch ein Menü, dass den User auffordert die Ticket Anzahl einzugeben oder zu löschen
