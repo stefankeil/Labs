@@ -1,0 +1,18 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class Read {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws IOException {
+		String file_name = "/Users/stefankeil/Documents/Workspace/Laps/121023_LabExercise3/test.rtf";
+		FileReader fr = new FileReader(file_name);
+		BufferedReader br = new BufferedReader(fr);
+
+	}
+
+}
