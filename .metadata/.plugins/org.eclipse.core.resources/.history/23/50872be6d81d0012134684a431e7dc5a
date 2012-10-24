@@ -9,7 +9,6 @@ import java.io.Reader;
 public class Read {
 
 	static String file_name = "/Users/stefankeil/Documents/Workspace/Laps/121023_LabExercise3/test.txt";
-	static int[] chars = new int[128];
 
 	public static void main(String[] args) throws IOException {
 
@@ -33,19 +32,12 @@ public class Read {
 
 	private static void handleCharacters(Reader reader) throws IOException {
 		int r;
-		int i= 1;
 		while ((r = reader.read()) != -1) {
-			char ch = (char) r;		
-			if (chars[r-1] == i){
-				i ++;
-				chars[r-1]=i;	
-			}
-			else{chars[r-1] = i;
-			}
+			char ch = (char) r;
 			if (ch != (char) 10) {
 				System.out.println(ch);
 			}
-		}System.out.println((char) 101 +": "+ chars[100] +" times");
+		}
 	}
 
 	private static void writetoFile() throws IOException {
@@ -58,5 +50,4 @@ public class Read {
 			e.printStackTrace();
 		}
 	}
-
 }

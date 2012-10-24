@@ -45,7 +45,7 @@ public class Read {
 			if (ch != (char) 10) {
 				System.out.println(ch);
 			}
-		}System.out.println((char) 101 +": "+ chars[100] +" times");
+		}System.out.println(chars);
 	}
 
 	private static void writetoFile() throws IOException {

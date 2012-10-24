@@ -16,6 +16,7 @@ public class Read {
 		Read read = new Read();
 		read.writetoFile();
 		read.readFromAFile();
+		System.out.println(chars);
 	}
 
 	public static void readFromAFile() {
@@ -33,19 +34,19 @@ public class Read {
 
 	private static void handleCharacters(Reader reader) throws IOException {
 		int r;
-		int i= 1;
 		while ((r = reader.read()) != -1) {
-			char ch = (char) r;		
-			if (chars[r-1] == i){
+			char ch = (char) r;
+			int i= 0;
+			if (chars[r] < 128){
 				i ++;
-				chars[r-1]=i;	
+				chars[r]=i;
 			}
-			else{chars[r-1] = i;
-			}
+			//chars[r] = 1;
+
 			if (ch != (char) 10) {
 				System.out.println(ch);
 			}
-		}System.out.println((char) 101 +": "+ chars[100] +" times");
+		}
 	}
 
 	private static void writetoFile() throws IOException {
