@@ -8,14 +8,12 @@ import java.io.Reader;
 
 public class Read {
 
-	static String file_name = "/Users/stefankeil/Documents/Workspace/Laps/121023_LabExercise3/test.txt";
+	static String file_name = "/Users/Fee/Documents/Uni/HTW/Informatik2/Lab/121023_LabExercise3/test.txt";
+	static String new_file = "/Users/Fee/Documents/Uni/HTW/Informatik2/Lab/121023_LabExercise3/frequency.txt";
 	static int[] chars = new int[128];
 
 	public static void main(String[] args) throws IOException {
-
-		Read read = new Read();
-		read.writetoFile();
-		read.readFromAFile();
+		Read.readFromAFile();
 	}
 
 	public static void readFromAFile() {
@@ -33,30 +31,36 @@ public class Read {
 
 	private static void handleCharacters(Reader reader) throws IOException {
 		int r;
-		int i= 1;
 		while ((r = reader.read()) != -1) {
-			char ch = (char) r;		
-			if (chars[r-1] == i){
-				i ++;
-				chars[r-1]=i;	
+			if (chars[r - 1] == 0) {
+				chars[r - 1] = 1;
+			} else {
+				chars[r - 1]++;
 			}
-			else{chars[r-1] = i;
+		}
+		for (int i = 0; i <= chars.length; i++) {
+			if (chars[i] != 0) {
+				 if (i != 9){
+				Read.writetoFile(i);
+				 }
 			}
-			if (ch != (char) 10) {
-				System.out.println(ch);
-			}
-		}System.out.println((char) 101 +": "+ chars[100] +" times");
+		}
 	}
 
-	private static void writetoFile() throws IOException {
+	private static void writetoFile(int i) throws IOException {
 		try {
-			FileWriter fw = new FileWriter(file_name, true);
+			FileWriter fw = new FileWriter(new_file, true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write("test");
+			bw.write("\n");
+			bw.write("'" + (char) (i + 1) + "'" + ": ");
+			for (int stern = 0; stern <= chars[i]; stern++) {
+				bw.write("*");
+				if (stern == chars[i]) {
+				}
+			}
 			bw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-
 }
