@@ -53,7 +53,7 @@ public class Read {
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write("\n");
 			bw.write("'" + (char) (i + 1) + "'" + ": ");
-			for (int stern = 0; stern <= chars[i]; stern++) {
+			for (int stern = 0; stern < chars[i]; stern++) {
 				bw.write("*");
 				if (stern == chars[i]) {
 				}
