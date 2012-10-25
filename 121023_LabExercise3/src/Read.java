@@ -38,7 +38,7 @@ public class Read {
 				chars[r - 1]++;
 			}
 		}
-		for (int i = 0; i <= chars.length; i++) {
+		for (int i = 0; i < chars.length; i++) {
 			if (chars[i] != 0) {
 				 if (i != 9){
 				Read.writetoFile(i);
