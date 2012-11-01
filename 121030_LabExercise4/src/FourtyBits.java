@@ -11,19 +11,19 @@ public class FourtyBits {
 	public static void computePrime() {
 		for (long i = number; i < number + 100; i++) {
 			boolean prime = true;
-			for (long j = 2; j < number + 100; j++) {
-				//System.out.println("check "+i+" with "+j);
-				if (i != j && i % j == 0) {
-					prime = false;
-					break;
+			if (i % 2 == 0) {
+				prime = false;
+			} else {
+				for (long j = 3; j < (int) Math.sqrt(number) + 100; j = j + 2) {
+					if (i != j && i % j == 0) {
+						prime = false;
+						break;
+					}
 				}
 			}
 			if (prime) {
 				System.out.println(i + " is a prime number!");
 			}
-			 else {
-			 System.out.println(i + " is not a prime number!");
-			 }
 		}
 	}
 }
