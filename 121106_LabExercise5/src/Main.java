@@ -18,16 +18,22 @@ public class Main {
 			int year = Integer.parseInt(in.readLine());
 			
 			JulianDate test = new JulianDate();
+			MetricDate test2 = new MetricDate();
 
 			test.day = day;
 			test.month = month;
 			test.year = year;
+			test2.day = day;
+			test2.month = month;
+			test2.year = year;
 			test.printGregorianCalendarDate();
 			test.getDaysBetween(test.convertGregoriantoJulian(), test.printGregorianCalendarDate());
 			test.isEqual(test.day, test.actualDay(), test.month, test.actualMonth());
 			test.getWeekDay(test.convertGregoriantoJulian());
-
-
+			long julian = test2.convertGregoriantoJulian();
+			test2.convertFromJulianToMetric(julian);
+			test2.printMetricAge();
+			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
