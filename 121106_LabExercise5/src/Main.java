@@ -17,22 +17,23 @@ public class Main {
 			System.out.println("Geben Sie das Jahr an dem Sie geboren sind ein: ");
 			int year = Integer.parseInt(in.readLine());
 			
-			JulianDate test = new JulianDate();
-			MetricDate test2 = new MetricDate();
+			Birthday birthday = new Birthday();
+			MetricDate metric = new MetricDate();
 
-			test.day = day;
-			test.month = month;
-			test.year = year;
-			test2.day = day;
-			test2.month = month;
-			test2.year = year;
-			test.printGregorianCalendarDate();
-			test.getDaysBetween(test.convertGregoriantoJulian(), test.printGregorianCalendarDate());
-			test.isEqual(test.day, test.actualDay(), test.month, test.actualMonth());
-			test.getWeekDay(test.convertGregoriantoJulian());
-			long julian = test2.convertGregoriantoJulian();
-			test2.convertFromJulianToMetric(julian);
-			test2.printMetricAge();
+			birthday.day = day;
+			birthday.month = month;
+			birthday.year = year;
+//			test2.day = day;
+//			test2.month = month;
+//			test2.year = year;
+			birthday.printGregorianCalendarDate();
+			birthday.getDaysBetween(birthday.convertGregoriantoJulian(), birthday.printGregorianCalendarDate());
+			birthday.isEqual(birthday.day, birthday.actualDay(), birthday.month, birthday.actualMonth());
+			birthday.getWeekDay(birthday.convertGregoriantoJulian());
+			//long julian = test2.convertGregoriantoJulian();
+			//test2.convertFromJulianToMetric(julian);
+			metric.getMetricAge(birthday.convertGregoriantoJulian(), birthday.printGregorianCalendarDate());
+			metric.printMetricAge();
 			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
