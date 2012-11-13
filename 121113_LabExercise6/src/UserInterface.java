@@ -56,26 +56,35 @@ public class UserInterface
         display = new JTextField();
         contentPane.add(display, BorderLayout.NORTH);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(4, 4));
-            addButton(buttonPanel, "7");
-            addButton(buttonPanel, "8");
-            addButton(buttonPanel, "9");
-            addButton(buttonPanel, "C");
-            
-            addButton(buttonPanel, "4");
-            addButton(buttonPanel, "5");
-            addButton(buttonPanel, "6");
-            addButton(buttonPanel, "?");
-            
-            addButton(buttonPanel, "1");
-            addButton(buttonPanel, "2");
-            addButton(buttonPanel, "3");
-            buttonPanel.add(new JLabel(" "));
-            
-            addButton(buttonPanel, "0");
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 6));
             addButton(buttonPanel, "+");
             addButton(buttonPanel, "-");
+            addButton(buttonPanel, "*");
+            addButton(buttonPanel, "/");
+            addButton(buttonPanel, "Deg");
+            addButton(buttonPanel, "Hex");
+            
+            addButton(buttonPanel, "9");
+            addButton(buttonPanel, "8");
+            addButton(buttonPanel, "7");
+            addButton(buttonPanel, "6");
+            addButton(buttonPanel, "Clear");
             addButton(buttonPanel, "=");
+            
+            addButton(buttonPanel, "5");
+            addButton(buttonPanel, "4");
+            addButton(buttonPanel, "3");
+            addButton(buttonPanel, "2");
+            addButton(buttonPanel, "1");
+            addButton(buttonPanel, "0");
+            
+            addButton(buttonPanel, "A");
+            addButton(buttonPanel, "B");
+            addButton(buttonPanel, "C");
+            addButton(buttonPanel, "D");
+            addButton(buttonPanel, "E");
+            addButton(buttonPanel, "F");
+
             
         contentPane.add(buttonPanel, BorderLayout.CENTER);
 
@@ -119,6 +128,16 @@ public class UserInterface
             int number = Integer.parseInt(command);
             calc.numberPressed(number);
         }
+        else if (command.equals("A")||
+        command.equals("B") ||
+        command.equals("C") ||
+        command.equals("D") ||
+        command.equals("E") ||
+        command.equals("F")){
+        	int hexNumber = calc.letterToInteger(command);
+        	String HexNumber = Integer.toHexString(hexNumber);
+        	calc.hexPressed(HexNumber);
+        }
         else if(command.equals("+")) {
             calc.plus();
         }
@@ -128,11 +147,15 @@ public class UserInterface
         else if(command.equals("=")) {
             calc.equals();
         }
-        else if(command.equals("C")) {
+        else if(command.equals("Clear")) {
             calc.clear();
         }
-        else if(command.equals("?")) {
-            showInfo();
+        else if(command.equals("/")) {
+            calc.divide();
+        }
+        
+        else if(command.equals("*")) {
+            calc.multiply();
         }
         // else unknown command.
 
@@ -146,19 +169,20 @@ public class UserInterface
     private void redisplay()
     {
         display.setText("" + calc.getDisplayValue());
+        display.setText("" + calc.getDisplayString());
     }
 
     /**
      * Toggle the info display in the calculator's status area between the
      * author and version information.
      */
-    private void showInfo()
-    {
-        if(showingAuthor)
-            status.setText(calc.getVersion());
-        else
-            status.setText(calc.getAuthor());
-
-        showingAuthor = !showingAuthor;
-    }
+//    private void showInfo()
+//    {
+//        if(showingAuthor)
+//            status.setText(calc.getVersion());
+//        else
+//            status.setText(calc.getAuthor());
+//
+//        showingAuthor = !showingAuthor;
+//    }
 }

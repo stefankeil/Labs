@@ -19,6 +19,7 @@ public class CalcEngine
 
     // The current value (to be) shown in the display.
     private int displayValue;
+    private String displayString;
     // The value of an existing left operand.
     private int leftOperand;
 
@@ -37,6 +38,11 @@ public class CalcEngine
     public int getDisplayValue()
     {
         return displayValue;
+    }
+    
+    public String getDisplayString()
+    {
+        return displayString;
     }
 
     /**
@@ -57,6 +63,25 @@ public class CalcEngine
             buildingDisplayValue = true;
         }
     }
+    
+    public void hexPressed(String HexNumber)
+    {
+        if(buildingDisplayValue) {
+            // Incorporate this digit.
+            displayString = HexNumber;
+        }
+        else {
+            // Start building a new number.
+            displayString = HexNumber;
+            buildingDisplayValue = true;
+        }
+    }
+    
+    public int letterToInteger(String command){
+    	char hex = command.charAt(0);
+    	int hexNumber  = (int) hex - 55;
+    	return hexNumber;
+    }
 
     /**
      * The 'plus' button was pressed. 
@@ -73,6 +98,17 @@ public class CalcEngine
     {
         applyOperator('-');
     }
+    
+    public void divide()
+    {
+        applyOperator('/');
+    }
+
+    public void multiply()
+    {
+        applyOperator('*');
+    }
+
     
     /**
      * The '=' button was pressed.
@@ -149,6 +185,16 @@ public class CalcEngine
                 haveLeftOperand = true;
                 leftOperand = displayValue;
                 break;
+            case '*':
+            	displayValue = leftOperand * displayValue;
+            	haveLeftOperand = true;
+            	leftOperand = displayValue;
+            	break;
+            case '/':
+            	displayValue = leftOperand / displayValue;
+            	haveLeftOperand = true;
+            	leftOperand = displayValue;
+            	break;
             default:
                 keySequenceError();
                 break;
