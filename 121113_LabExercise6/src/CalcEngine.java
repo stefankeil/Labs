@@ -4,6 +4,7 @@
  * @author  David J. Barnes and Michael Kolling 
  * @version 2008.03.30
  */
+
 public class CalcEngine
 {
     // The calculator's state is maintained in three fields:
@@ -22,7 +23,7 @@ public class CalcEngine
     private String displayString;
     // The value of an existing left operand.
     private int leftOperand;
-
+    //static int parseInt;
     /**
      * Create a CalcEngine.
      */
@@ -64,24 +65,24 @@ public class CalcEngine
         }
     }
     
-    public void hexPressed(String HexNumber)
+    public void hexPressed(int HexNumber)
     {
         if(buildingDisplayValue) {
             // Incorporate this digit.
-            displayString = HexNumber;
+            displayString = Integer.toString(HexNumber);
         }
         else {
             // Start building a new number.
-            displayString = HexNumber;
+            displayString = Integer.toString(HexNumber);
             buildingDisplayValue = true;
         }
     }
     
-    public int letterToInteger(String command){
-    	char hex = command.charAt(0);
-    	int hexNumber  = (int) hex - 55;
-    	return hexNumber;
-    }
+//    public int letterToInteger(String command){
+//    	char hex = command.charAt(0);
+//    	int hexNumber  = (int) hex - 55;
+//    	return hexNumber;
+//    }
 
     /**
      * The 'plus' button was pressed. 

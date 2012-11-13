@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import java.lang.Character;
+
 
 /**
  * A graphical user interface for the calculator. No calculation is being
@@ -128,15 +130,20 @@ public class UserInterface
             int number = Integer.parseInt(command);
             calc.numberPressed(number);
         }
-        else if (command.equals("A")||
+        else if 
+        (command.equals("A")||
         command.equals("B") ||
         command.equals("C") ||
         command.equals("D") ||
         command.equals("E") ||
         command.equals("F")){
-        	int hexNumber = calc.letterToInteger(command);
-        	String HexNumber = Integer.toHexString(hexNumber);
-        	calc.hexPressed(HexNumber);
+        	char chars = command.charAt(0);
+        	int HexChar = Character.digit(chars, 16);
+        	//System.out.println(HexChar);
+        	//number = Integer.parseInt(command,16);
+        	//int hexNumber = number.parseInt(command,16);
+        	String HexNumber = Integer.toHexString(HexChar);
+        	calc.hexPressed(HexChar);
         }
         else if(command.equals("+")) {
             calc.plus();
