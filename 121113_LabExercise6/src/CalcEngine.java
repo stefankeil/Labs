@@ -65,24 +65,19 @@ public class CalcEngine
         }
     }
     
-    public void hexPressed(int HexNumber)
+    public void hexPressed(String HexNumber)
     {
         if(buildingDisplayValue) {
             // Incorporate this digit.
-            displayString = Integer.toString(HexNumber);
+            displayValue = Integer.parseInt(HexNumber, 16);
         }
         else {
             // Start building a new number.
-            displayString = Integer.toString(HexNumber);
-            buildingDisplayValue = true;
+        	displayValue = Integer.parseInt(HexNumber, 16);
+        	buildingDisplayValue = true;
         }
     }
     
-//    public int letterToInteger(String command){
-//    	char hex = command.charAt(0);
-//    	int hexNumber  = (int) hex - 55;
-//    	return hexNumber;
-//    }
 
     /**
      * The 'plus' button was pressed. 

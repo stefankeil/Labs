@@ -137,13 +137,7 @@ public class UserInterface
         command.equals("D") ||
         command.equals("E") ||
         command.equals("F")){
-        	char chars = command.charAt(0);
-        	int HexChar = Character.digit(chars, 16);
-        	//System.out.println(HexChar);
-        	//number = Integer.parseInt(command,16);
-        	//int hexNumber = number.parseInt(command,16);
-        	String HexNumber = Integer.toHexString(HexChar);
-        	calc.hexPressed(HexChar);
+        	calc.hexPressed(command);
         }
         else if(command.equals("+")) {
             calc.plus();
@@ -176,7 +170,7 @@ public class UserInterface
     private void redisplay()
     {
         display.setText("" + calc.getDisplayValue());
-        display.setText("" + calc.getDisplayString());
+        //display.setText("" + calc.getDisplayString());
     }
 
     /**
