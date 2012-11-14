@@ -2,8 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
-import java.lang.Character;
-
 
 /**
  * A graphical user interface for the calculator. No calculation is being
@@ -22,6 +20,7 @@ public class UserInterface
     private JFrame frame;
     private JTextField display;
     private JLabel status;
+    private JPanel buttonPanelHex;
 
     /**
      * Create a user interface.
@@ -31,7 +30,6 @@ public class UserInterface
     {
         calc = engine;
         showingAuthor = true;
-        frame = new JFrame(calc.getTitle());
         makeFrame();
         frame.setVisible(true);
     }
@@ -50,7 +48,7 @@ public class UserInterface
      */
     private void makeFrame()
     {
-//        frame = new JFrame(calc.getTitle());
+        frame = new JFrame(calc.getTitle());
         
         JPanel contentPane = (JPanel)frame.getContentPane();
         contentPane.setLayout(new BorderLayout(8, 8));
@@ -58,86 +56,50 @@ public class UserInterface
 
         display = new JTextField();
         contentPane.add(display, BorderLayout.NORTH);
-
+        
+        JPanel buttonPanelContainer = new JPanel(new BorderLayout());
+        
+        
         JPanel buttonPanel = new JPanel(new GridLayout(3, 6));
-            addButton(buttonPanel, "+");
-            addButton(buttonPanel, "-");
-            addButton(buttonPanel, "*");
-            
-            addButton(buttonPanel, "/");
-            addButton(buttonPanel, "Deg");
-            addButton(buttonPanel, "Hex");
-            
-            addButton(buttonPanel, "Clear");
-            addButton(buttonPanel, "=");
-            addButton(buttonPanel, "9");
-            
-            addButton(buttonPanel, "8");
-            addButton(buttonPanel, "7");
-            addButton(buttonPanel, "6");
-            
-            addButton(buttonPanel, "5");
-            addButton(buttonPanel, "4");
-            addButton(buttonPanel, "3");
-            
-            addButton(buttonPanel, "2");
-            addButton(buttonPanel, "1");
-            addButton(buttonPanel, "0");
+        addButton(buttonPanel, "+");
+        addButton(buttonPanel, "-");
+        addButton(buttonPanel, "*");
+        addButton(buttonPanel, "/");
+        addButton(buttonPanel, "Deg");
+        addButton(buttonPanel, "Hex");
+        
+        addButton(buttonPanel, "9");
+        addButton(buttonPanel, "8");
+        addButton(buttonPanel, "7");
+        addButton(buttonPanel, "6");
+        addButton(buttonPanel, "Clear");
+        addButton(buttonPanel, "=");
+        
+        addButton(buttonPanel, "5");
+        addButton(buttonPanel, "4");
+        addButton(buttonPanel, "3");
+        addButton(buttonPanel, "2");
+        addButton(buttonPanel, "1");
+        addButton(buttonPanel, "0");
+        
+        buttonPanelHex = new JPanel(new GridLayout(1, 6));
+        addButton(buttonPanelHex, "A");
+        addButton(buttonPanelHex, "B");
+        addButton(buttonPanelHex, "C");
+        addButton(buttonPanelHex, "D");
+        addButton(buttonPanelHex, "E");
+        addButton(buttonPanelHex, "F");
 
             
-        contentPane.add(buttonPanel, BorderLayout.CENTER);
+        buttonPanelContainer.add(buttonPanel, BorderLayout.NORTH);
+        buttonPanelContainer.add(buttonPanelHex, BorderLayout.SOUTH);
+        contentPane.add(buttonPanelContainer, BorderLayout.CENTER);
 
         status = new JLabel(calc.getAuthor());
         contentPane.add(status, BorderLayout.SOUTH);
 
         frame.pack();
-    }
-    
-    private void makeFrameHex()
-    {        
-        JPanel contentPane = (JPanel)frame.getContentPane();
-        contentPane.setLayout(new BorderLayout(8, 8));
-        contentPane.setBorder(new EmptyBorder( 10, 10, 10, 10));
-
-        display = new JTextField();
-        contentPane.add(display, BorderLayout.NORTH);
-
-        JPanel buttonPanel = new JPanel(new GridLayout(4, 6));
-            addButton(buttonPanel, "+");
-            addButton(buttonPanel, "-");
-            addButton(buttonPanel, "*");
-            addButton(buttonPanel, "/");
-            addButton(buttonPanel, "Deg");
-            addButton(buttonPanel, "Hex");
-            
-            addButton(buttonPanel, "9");
-            addButton(buttonPanel, "8");
-            addButton(buttonPanel, "7");
-            addButton(buttonPanel, "6");
-            addButton(buttonPanel, "Clear");
-            addButton(buttonPanel, "=");
-            
-            addButton(buttonPanel, "5");
-            addButton(buttonPanel, "4");
-            addButton(buttonPanel, "3");
-            addButton(buttonPanel, "2");
-            addButton(buttonPanel, "1");
-            addButton(buttonPanel, "0");
-            
-            addButton(buttonPanel, "A");
-            addButton(buttonPanel, "B");
-            addButton(buttonPanel, "C");
-            addButton(buttonPanel, "D");
-            addButton(buttonPanel, "E");
-            addButton(buttonPanel, "F");
-
-            
-        contentPane.add(buttonPanel, BorderLayout.CENTER);
-
-        //status = new JLabel(calc.getAuthor());
-        contentPane.add(status, BorderLayout.SOUTH);
-
-        frame.pack();
+        buttonPanelHex.setVisible(false);
     }
 
     /**
@@ -204,15 +166,11 @@ public class UserInterface
         }
         
         else if(command.equals("Hex")) {
-            //showingAuthor = true;
-            makeFrameHex();
-            frame.setVisible(true);
+        	buttonPanelHex.setVisible(true);
         }
         
         else if(command.equals("Deg")) {
-        	//showingAuthor = true;
-            makeFrame();
-            frame.setVisible(true);
+        	buttonPanelHex.setVisible(false);
         }
         
         // else unknown command.
@@ -227,7 +185,6 @@ public class UserInterface
     private void redisplay()
     {
         display.setText("" + calc.getDisplayValue());
-        //display.setText("" + calc.getDisplayString());
     }
 
     /**
