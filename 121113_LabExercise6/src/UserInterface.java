@@ -31,6 +31,7 @@ public class UserInterface
     {
         calc = engine;
         showingAuthor = true;
+        frame = new JFrame(calc.getTitle());
         makeFrame();
         frame.setVisible(true);
     }
@@ -49,8 +50,51 @@ public class UserInterface
      */
     private void makeFrame()
     {
-        frame = new JFrame(calc.getTitle());
+//        frame = new JFrame(calc.getTitle());
         
+        JPanel contentPane = (JPanel)frame.getContentPane();
+        contentPane.setLayout(new BorderLayout(8, 8));
+        contentPane.setBorder(new EmptyBorder( 10, 10, 10, 10));
+
+        display = new JTextField();
+        contentPane.add(display, BorderLayout.NORTH);
+
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 6));
+            addButton(buttonPanel, "+");
+            addButton(buttonPanel, "-");
+            addButton(buttonPanel, "*");
+            
+            addButton(buttonPanel, "/");
+            addButton(buttonPanel, "Deg");
+            addButton(buttonPanel, "Hex");
+            
+            addButton(buttonPanel, "Clear");
+            addButton(buttonPanel, "=");
+            addButton(buttonPanel, "9");
+            
+            addButton(buttonPanel, "8");
+            addButton(buttonPanel, "7");
+            addButton(buttonPanel, "6");
+            
+            addButton(buttonPanel, "5");
+            addButton(buttonPanel, "4");
+            addButton(buttonPanel, "3");
+            
+            addButton(buttonPanel, "2");
+            addButton(buttonPanel, "1");
+            addButton(buttonPanel, "0");
+
+            
+        contentPane.add(buttonPanel, BorderLayout.CENTER);
+
+        status = new JLabel(calc.getAuthor());
+        contentPane.add(status, BorderLayout.SOUTH);
+
+        frame.pack();
+    }
+    
+    private void makeFrameHex()
+    {        
         JPanel contentPane = (JPanel)frame.getContentPane();
         contentPane.setLayout(new BorderLayout(8, 8));
         contentPane.setBorder(new EmptyBorder( 10, 10, 10, 10));
@@ -90,7 +134,7 @@ public class UserInterface
             
         contentPane.add(buttonPanel, BorderLayout.CENTER);
 
-        status = new JLabel(calc.getAuthor());
+        //status = new JLabel(calc.getAuthor());
         contentPane.add(status, BorderLayout.SOUTH);
 
         frame.pack();
@@ -158,6 +202,19 @@ public class UserInterface
         else if(command.equals("*")) {
             calc.multiply();
         }
+        
+        else if(command.equals("Hex")) {
+            //showingAuthor = true;
+            makeFrameHex();
+            frame.setVisible(true);
+        }
+        
+        else if(command.equals("Deg")) {
+        	//showingAuthor = true;
+            makeFrame();
+            frame.setVisible(true);
+        }
+        
         // else unknown command.
 
         redisplay();
