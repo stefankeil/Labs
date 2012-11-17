@@ -130,35 +130,34 @@ public class UserInterface implements ActionListener {
 				|| command.equals("9")) {
 			int number = Integer.parseInt(command);
 			calc.numberPressed(number);
+
 		} else if (command.equals("A") || command.equals("B")
 				|| command.equals("C") || command.equals("D")
 				|| command.equals("E") || command.equals("F")) {
 			calc.hexPressed(command);
 
-		}
-		// }
-
-		else if (command.equals("+")) {
+		} else if (command.equals("+")) {
 			calc.plus();
+
 		} else if (command.equals("-")) {
 			calc.minus();
+
 		} else if (command.equals("=")) {
 			calc.equals();
+
 		} else if (command.equals("Clear")) {
 			calc.clear();
+
 		} else if (command.equals("/")) {
 			calc.divide();
-		}
 
-		else if (command.equals("*")) {
+		} else if (command.equals("*")) {
 			calc.multiply();
-		}
 
-		else if (command.equals("Hex")) {
+		} else if (command.equals("Hex")) {
 			buttonPanelHex.setVisible(true);
-		}
 
-		else if (command.equals("Deg")) {
+		} else if (command.equals("Deg")) {
 			buttonPanelHex.setVisible(false);
 		}
 
@@ -174,7 +173,8 @@ public class UserInterface implements ActionListener {
 	private void redisplay() {
 		if (buttonPanelHex.isVisible()) {
 			display.setText(""
-					+ Integer.toHexString((int) calc.getDisplayValue()).toUpperCase());
+					+ Integer.toHexString((int) calc.getDisplayValue())
+							.toUpperCase());
 		} else {
 			display.setText("" + calc.getDisplayValue());
 		}
