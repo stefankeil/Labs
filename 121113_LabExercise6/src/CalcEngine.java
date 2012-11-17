@@ -19,10 +19,10 @@ public class CalcEngine
     private char lastOperator;
 
     // The current value (to be) shown in the display.
-    private int displayValue;
+    private double displayValue;
     private String displayString;
     // The value of an existing left operand.
-    private int leftOperand;
+    private double leftOperand;
     //static int parseInt;
     /**
      * Create a CalcEngine.
@@ -36,7 +36,7 @@ public class CalcEngine
      * @return The value that should currently be displayed
      * on the calculator display.
      */
-    public int getDisplayValue()
+    public double getDisplayValue()
     {
         return displayValue;
     }
