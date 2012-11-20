@@ -10,7 +10,7 @@ public class Main {
 		stack.push("abdes");
 		stack.push("c");
 		
-		stack.print();
+		stack.top();
 	}
 
 }

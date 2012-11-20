@@ -27,5 +27,9 @@ public class Stack<T> {
 		postfixStack.print();
 	}
 	
+	public void top(){
+		postfixStack.top();
+	}
+	
 	
 }

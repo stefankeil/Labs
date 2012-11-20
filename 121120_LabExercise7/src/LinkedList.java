@@ -1,4 +1,4 @@
- public class LinkedList<T> {
+public class LinkedList<T> {
 	private LinkedListItem<T> first;
 
 	public LinkedList() {
@@ -23,6 +23,16 @@
 		if (!isEmpty()) {
 			LinkedListItem<T> item = first;
 			first = first.pointer;
+			return item;
+		} else {
+			return null;
+		}
+	}
+
+	public LinkedListItem<T> top() {
+		if (!isEmpty()) {
+			LinkedListItem<T> item = first;
+			//System.out.println(item.value);
 			return item;
 		} else {
 			return null;
