@@ -22,7 +22,7 @@ public class Stack<T> {
 		if (!empty()) {
 			return postfixStack.delete();
 		} else {
-			throw new UnderflowException("ListStack pop");
+			throw new UnderflowException("Stack Underflow");
 		}
 	}
 
