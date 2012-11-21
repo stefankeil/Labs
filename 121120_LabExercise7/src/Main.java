@@ -9,7 +9,7 @@ public class Main {
 		Stack<String> stack = new Stack<String>();
 		Postfix postfix = new Postfix();
 		
-		postfix.evaluate("3 5+");
+		postfix.evaluate("3 5 +");
 		
 		stack.push("abdes");
 		stack.push("c");

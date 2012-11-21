@@ -5,14 +5,14 @@ public class Postfix {
 	//der String muss leerzeichen zwischen den einzelnen term bzw. operatoren enthalten
 	
 	public LinkedListItem<Integer> evaluate (String pfx) throws UnderflowException{		
-		if (pfx.equals("")){
+		if (!pfx.equals("")){
 			Stack <Integer> ablage = new Stack <Integer>();
 			String[] stringarray = pfx.split(" ");
 			String operator;
 			LinkedListItem<Integer> lhs;
 			LinkedListItem<Integer> rhs;
 			for(int i= 0; i<= stringarray.length;i++){
-				if (stringarray[i].substring(1).matches("0-9")){
+				if (stringarray[i].matches("(\\d)")){
 					ablage.push(Integer.parseInt(stringarray[i]));
 				}else{
 					operator = stringarray[i];
