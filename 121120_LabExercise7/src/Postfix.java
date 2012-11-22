@@ -4,7 +4,7 @@ public class Postfix {
 	// der String muss leerzeichen zwischen den einzelnen term bzw. operatoren
 	// enthalten
 
-	public LinkedListItem<Integer> evaluate(String pfx)
+	public void evaluate(String pfx)
 			throws UnderflowException {
 		if (!pfx.equals("")) {
 			Stack<Integer> ablage = new Stack<Integer>();
@@ -37,8 +37,7 @@ public class Postfix {
 				}
 			}
 			System.out.println("Das Ergebnis lautet: "+ ablage.pop().value);
-			return ablage.pop();
+			//return ablage.pop();
 		}
-		throw new UnderflowException("Stack Underflow");
 	}
 }

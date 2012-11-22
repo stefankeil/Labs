@@ -11,10 +11,10 @@ public class Main {
 		
 		postfix.evaluate("3 5 +");
 		
-		stack.push("abdes");
-		stack.push("c");
-		
-		stack.top();
+//		stack.push("abdes");
+//		stack.push("c");
+//		
+//		stack.top();
 	}
 
 }
