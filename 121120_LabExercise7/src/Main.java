@@ -8,9 +8,7 @@ public class Main {
 	public static void main(String[] args) throws UnderflowException {
 		Stack<String> stack = new Stack<String>();
 		Postfix postfix = new Postfix();
-		
-		postfix.evaluate("3 5 +");
-		
+		Gui gui = new Gui(postfix);
 //		stack.push("abdes");
 //		stack.push("c");
 //		

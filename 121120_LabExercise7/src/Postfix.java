@@ -1,5 +1,5 @@
 public class Postfix {
-
+	String finalResult;
 	// private Stack stack;
 	// der String muss leerzeichen zwischen den einzelnen term bzw. operatoren
 	// enthalten
@@ -36,8 +36,12 @@ public class Postfix {
 					}
 				}
 			}
-			System.out.println("Das Ergebnis lautet: "+ ablage.pop().value);
-			//return ablage.pop();
+			finalResult =  ablage.pop().value.toString();
+			
 		}
+	}
+
+	public String getFinalResult() {
+		return finalResult;
 	}
 }
