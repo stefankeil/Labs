@@ -40,7 +40,7 @@ public class Postfix {
 					}
 				}
 			}
-			System.out.println("Das Ergebnis lautet: " + ablage.pop().value);
+			//System.out.println("Das Ergebnis lautet: " + ablage.pop().value);
 			// return ablage.pop();
 
 			finalResult =  ablage.pop().value.toString();			
@@ -71,9 +71,16 @@ public class Postfix {
 				if (!operatorAblage.empty()) {
 					if (operator.value.equals("+") || operator.value.equals("-")) {
 						if (operator.pointer != null) {
-							if (operator.pointer.value.equals("*")
-									|| operator.pointer.value.equals("/")) {
-								if (operator.pointer.pointer != null) {
+							if (operator.pointer.value.equals("*") || operator.pointer.value.equals("/")) {
+								if (operator.pointer.pointer.pointer != null){
+									numberString += operator.pointer.value + " ";
+									numberString += operator.pointer.pointer.value + " ";
+									numberString += operator.pointer.pointer.pointer.value + " ";
+									operatorAblage.pop();
+									operatorAblage.pop();
+									operatorAblage.pop();
+								}
+								else if (operator.pointer.pointer != null) {
 									numberString += operator.pointer.value + " ";
 									numberString += operator.pointer.pointer.value + " ";
 									operatorAblage.pop();
@@ -99,10 +106,7 @@ public class Postfix {
 							} else if (operator.value.equals(operator.pointer.value)) {
 								numberString += operatorAblage.pop().value + " ";
 							} else {
-								numberString += operator.pointer.value + " ";
-								operatorAblage.pop();
-								operatorAblage.pop();
-								operatorAblage.push(operator.value);
+								continue;
 							}
 						} else {
 							continue;
