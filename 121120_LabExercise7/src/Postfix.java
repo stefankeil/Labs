@@ -1,22 +1,26 @@
 public class Postfix {
-	String finalResult;
-	int rest;
+
 	// private Stack stack;
 	// der String muss leerzeichen zwischen den einzelnen term bzw. operatoren
 	// enthalten
 
-	public void evaluate(String pfx) throws UnderflowException {
+	public String evaluate(String pfx) throws UnderflowException, IllegalArgumentException {
+		int rest = 0;
+		String finalResult = null;
 		if (!pfx.equals("")) {
 			Stack<Integer> ablage = new Stack<Integer>();
-			String[] stringarray = pfx.split(" ");
+			String[] stringArray = pfx.split(" ");
 			String operator;
 			LinkedListItem<Integer> lhs;
 			LinkedListItem<Integer> rhs;
-			for (int i = 0; i < stringarray.length; i++) {
-				if (stringarray[i].matches("(\\d{1,2})")) {
-					ablage.push(Integer.parseInt(stringarray[i]));
+			for (int i = 0; i < stringArray.length; i++) {
+				if (stringArray[i].matches("(\\d{1,2})")) {
+					ablage.push(Integer.parseInt(stringArray[i]));
 				} else {
-					operator = stringarray[i];
+					if (stringArray[i].length() > 1){
+						throw new IllegalArgumentException();
+					}
+					operator = stringArray[i];
 					if (!ablage.empty()) {
 						rhs = ablage.pop();
 						lhs = ablage.pop();
@@ -34,62 +38,58 @@ public class Postfix {
 							ablage.push(result);
 						} else if (operator.equals("/")) {
 							int result = lhs.value / rhs.value;
-							 rest = lhs.value % rhs.value;
+							rest = lhs.value % rhs.value;
 							ablage.push(result);
 						}
 					}
 				}
 			}
-			//System.out.println("Das Ergebnis lautet: " + ablage.pop().value);
-			// return ablage.pop();
 
-			finalResult =  ablage.pop().value.toString();			
+			finalResult = ablage.pop().value.toString();			
+			if (rest > 0) {
+				finalResult = finalResult + "  + Rest von: " + rest;
+			}
 		}
+		return finalResult;
 	}
 
-	public String getFinalResult() {
-		if (rest > 0){
-			return finalResult + "  + Rest von: " + rest;
-		} else {
-			return finalResult;
-		}
-		
-	}
-
-	public String infixToPostfix(String ifx) throws UnderflowException {
+	public String infixToPostfix(String ifx) throws UnderflowException, FormatException, IllegalArgumentException {
 		Stack<String> operatorAblage = new Stack<String>();
-		String[] stringarray = ifx.split(" ");
+		String[] stringArray = ifx.split(" ");
 		String numberString = "";
 		LinkedListItem<String> operator;
 
-		for (int i = 0; i < stringarray.length; i++) {
-			if (stringarray[i].matches("(\\d)")) {
-				numberString += stringarray[i] + " ";
+		for (int i = 0; i < stringArray.length; i++) {
+			if (stringArray[i].matches("(\\d)")) {
+				numberString += stringArray[i] + " ";
 			} else {
-				operatorAblage.push(stringarray[i]);
+				if (stringArray[i].length() > 1){
+					throw new IllegalArgumentException();
+				}
+				operatorAblage.push(stringArray[i]);
 				operator = operatorAblage.top();
 				if (!operatorAblage.empty()) {
 					if (operator.value.equals("+") || operator.value.equals("-")) {
 						if (operator.pointer != null) {
 							if (operator.pointer.value.equals("*") || operator.pointer.value.equals("/")) {
-								if (operator.pointer.pointer.pointer != null){
+								if (operator.pointer.pointer.pointer != null) {
 									numberString += operator.pointer.value + " ";
 									numberString += operator.pointer.pointer.value + " ";
-									numberString += operator.pointer.pointer.pointer.value + " ";
+									numberString += operator.pointer.pointer.pointer.value	+ " ";
 									operatorAblage.pop();
 									operatorAblage.pop();
 									operatorAblage.pop();
-								}
-								else if (operator.pointer.pointer != null) {
-									numberString += operator.pointer.value + " ";
-									numberString += operator.pointer.pointer.value + " ";
+								} else if (operator.pointer.pointer != null) {
+									numberString += operator.pointer.value	+ " ";
+									numberString += operator.pointer.pointer.value	+ " ";
 									operatorAblage.pop();
 									operatorAblage.pop();
 								} else {
-									numberString += operator.pointer.value + " ";
+									numberString += operator.pointer.value	+ " ";
 								}
-							} else if (operator.value.equals(operator.pointer.value)) {
-								numberString += operatorAblage.pop().value + " ";
+							} else if (operator.value
+									.equals(operator.pointer.value)) {
+								numberString += operatorAblage.pop().value	+ " ";
 							} else {
 								numberString += operator.pointer.value + " ";
 								operatorAblage.pop();
@@ -99,12 +99,15 @@ public class Postfix {
 						} else {
 							continue;
 						}
-					} else if (operator.value.equals("*") || operator.value.equals("/")) {
+					} else if (operator.value.equals("*")
+							|| operator.value.equals("/")) {
 						if (operator.pointer != null) {
-							if (operator.pointer.value.equals("+") || operator.pointer.value.equals("-")) {
+							if (operator.pointer.value.equals("+")
+									|| operator.pointer.value.equals("-")) {
 								continue;
-							} else if (operator.value.equals(operator.pointer.value)) {
-								numberString += operatorAblage.pop().value + " ";
+							} else if (operator.value
+									.equals(operator.pointer.value)) {
+								numberString += operatorAblage.pop().value	+ " ";
 							} else {
 								continue;
 							}
@@ -112,7 +115,9 @@ public class Postfix {
 							continue;
 						}
 					} else {
-						System.out.println("falsches Format");
+						throw new FormatException("falsches Format");
+						//System.out.println("falsches Format");
+						//break;
 					}
 				}
 			}
@@ -122,7 +127,7 @@ public class Postfix {
 			numberString += operatorAblage.pop().value + " ";
 		}
 
-		System.out.println("Postfix: " + numberString);
+		//System.out.println("Postfix: " + numberString);
 		return numberString;
 	}
 }

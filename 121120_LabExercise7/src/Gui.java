@@ -1,74 +1,70 @@
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class Gui implements ActionListener {
+public class Gui extends JFrame implements ActionListener {
 	private Postfix evaluater;
 
-	private JFrame frame;
-	private JTextField PostfixDisplay;
-	private JTextField InfixDisplay;
-	String currentValue;
-
-	private JLabel status;
+	private JTextField postfixDisplay;
+	private JTextField infixDisplay;
 
 	public Gui(Postfix engine) {
 		evaluater = engine;
 		makeFrame();
-		frame.setVisible(true);
-	}
-
-	public void setVisible(boolean visible) {
-		frame.setVisible(visible);
+		this.setVisible(true);
 	}
 
 	private void makeFrame() {
-		frame = new JFrame("Postfix/Infix Evaluater");
-
-		JPanel contentPane = (JPanel) frame.getContentPane();
+		this.setTitle("Postfix/Infix Evaluater");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel contentPane = (JPanel) this.getContentPane();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-		PostfixDisplay = new JTextField();
-		JButton buttonpfx = new JButton("evaluate Postfix Expression");
-		buttonpfx.setToolTipText("Please put a blank between Operator and Operand. e.g.:3 3 +");
-		buttonpfx.addActionListener(this);
-		contentPane.add(PostfixDisplay);
-		contentPane.add(buttonpfx);
+		postfixDisplay = new JTextField();
+		JButton buttonPfx = new JButton("evaluate Postfix Expression");
+		buttonPfx.setToolTipText("Please put a blank between Operator and Operand. e.g.:3 3 +");
+		buttonPfx.addActionListener(this);
+		contentPane.add(postfixDisplay);
+		contentPane.add(buttonPfx);
 
-		InfixDisplay = new JTextField();
-		JButton buttonifx = new JButton("evaluate Infix Expression");
-		contentPane.add(InfixDisplay);
-		buttonifx.addActionListener(this);
-		contentPane.add(buttonifx);
+		infixDisplay = new JTextField();
+		JButton buttonIfx = new JButton("evaluate Infix Expression");
+		contentPane.add(infixDisplay);
+		buttonIfx.addActionListener(this);
+		contentPane.add(buttonIfx);
 		
-		status = new JLabel("Created by Fee Braun & Stefan Keil");
+		JLabel status = new JLabel("Created by Fee Braun & Stefan Keil");
 		contentPane.add(status);
-		frame.pack();
+		this.pack();
 	}
 
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 
 		if (command.equals("evaluate Postfix Expression")) {
-			currentValue = PostfixDisplay.getText();
+			String currentValue = postfixDisplay.getText();
 			try {
-				evaluater.evaluate(currentValue);
-				PostfixDisplay.setText(evaluater.getFinalResult());
+				String result = evaluater.evaluate(currentValue);
+				postfixDisplay.setText(result);
 			} catch (UnderflowException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(Gui.this, "Der Stack ist leer");
+			} catch (IllegalArgumentException e) {
+				JOptionPane.showMessageDialog(Gui.this, "Jede Zahl und jeder Operator muss durch ein Leerzeichen getrennt sein.");
 			}
-		}
-		// } else if (command.equals("evaluate Infix Expression")) {
-		// currentValue = InfixDisplay.getText();
-		// try {
-		// evaluater.infixToPostfix(currentValue);
-		// InfixDisplay.setText(evaluater.getFinalResult());
-		// } catch (UnderflowException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		} else if (command.equals("evaluate Infix Expression")) {
+			String currentValue = infixDisplay.getText();
+			try {
+				String result = evaluater.infixToPostfix(currentValue);
+				infixDisplay.setText(result);
+			} catch (IllegalArgumentException e) {
+				JOptionPane.showMessageDialog(Gui.this, "Jede Zahl und jeder Operator muss durch ein Leerzeichen getrennt sein.");
+			} catch (UnderflowException e) {
+				JOptionPane.showMessageDialog(Gui.this, "Der Stack ist leer");
+			} catch (FormatException e) {
+				JOptionPane.showMessageDialog(Gui.this, "Bitte benutzen Sie nur die Operatoren / * - +");
+			}
+		 }
 	}
 }

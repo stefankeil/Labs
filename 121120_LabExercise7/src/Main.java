@@ -4,18 +4,18 @@ public class Main {
 	/**
 	 * @param args
 	 * @throws UnderflowException 
+	 * @throws FormatException 
 	 */
-	public static void main(String[] args) throws UnderflowException {
-		Stack<String> stack = new Stack<String>();
+	public static void main(String[] args) throws UnderflowException, FormatException {
+//		Stack<String> stack = new Stack<String>();
 		Postfix postfix = new Postfix();		
 		
-		String postfixString = postfix.infixToPostfix("4 + 4 + 5 / 5 * 9 - 3");
-		postfix.evaluate(postfixString);
+//		String postfixString = postfix.infixToPostfix("4 + 4+5");
+//		postfix.evaluate(postfixString);
 		
-//		Gui gui = new Gui(postfix);
+		Gui gui = new Gui(postfix);
 //		stack.push("abdes");
 //		stack.push("c");
-//		
 //		stack.top();
 	}
 
