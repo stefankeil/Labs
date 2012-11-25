@@ -26,9 +26,9 @@ public class Stack<T> {
 		}
 	}
 
-	public void top() throws UnderflowException {
+	public LinkedListItem<T> top() throws UnderflowException {
 		if (!empty()) {
-			postfixStack.top();
+			return postfixStack.top();
 		} else {
 			throw new UnderflowException("Stack Underflow");
 		}
