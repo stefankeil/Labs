@@ -58,6 +58,7 @@ public class Postfix {
 		String[] stringArray = ifx.split(" ");
 		String numberString = "";
 		LinkedListItem<String> operator;
+		int priority;
 
 		for (int i = 0; i < stringArray.length; i++) {
 			if (stringArray[i].matches("(\\d)")) {
@@ -66,12 +67,13 @@ public class Postfix {
 				if (stringArray[i].length() > 1){
 					throw new IllegalArgumentException();
 				}
+				priority = findPriority(stringArray[i]);
 				operatorAblage.push(stringArray[i]);
 				operator = operatorAblage.top();
 				if (!operatorAblage.empty()) {
-					if (operator.value.equals("+") || operator.value.equals("-")) {
+					if (priority == 3 || priority == 4) {
 						if (operator.pointer != null) {
-							if (operator.pointer.value.equals("*") || operator.pointer.value.equals("/")) {
+							if (priority == 1 || priority == 2) {
 								if (operator.pointer.pointer.pointer != null) {
 									numberString += operator.pointer.value + " ";
 									numberString += operator.pointer.pointer.value + " ";
@@ -99,11 +101,9 @@ public class Postfix {
 						} else {
 							continue;
 						}
-					} else if (operator.value.equals("*")
-							|| operator.value.equals("/")) {
+					} else if (priority == 1 || priority == 2) {
 						if (operator.pointer != null) {
-							if (operator.pointer.value.equals("+")
-									|| operator.pointer.value.equals("-")) {
+							if (priority == 3 || priority == 4) {
 								continue;
 							} else if (operator.value
 									.equals(operator.pointer.value)) {
@@ -129,5 +129,18 @@ public class Postfix {
 
 		//System.out.println("Postfix: " + numberString);
 		return numberString;
+	}
+	
+	public int findPriority(String operator){
+		if (operator == "*") {
+			return 1;
+		}else if (operator == "/"){
+			return 2;
+		}else if (operator == "+"){
+			return 3;
+		}else if (operator == "-"){
+			return 4;
+		}
+		return 0;
 	}
 }
