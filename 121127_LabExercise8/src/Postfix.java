@@ -71,9 +71,9 @@ public class Postfix {
 				operatorAblage.push(stringArray[i]);
 				operator = operatorAblage.top();
 				if (!operatorAblage.empty()) {
-					if (priority == 3 || priority == 4) {
+					if (priority == 2) {
 						if (operator.pointer != null) {
-							if (priority == 1 || priority == 2) {
+							if (priority == 1) {
 								if (operator.pointer.pointer.pointer != null) {
 									numberString += operator.pointer.value + " ";
 									numberString += operator.pointer.pointer.value + " ";
@@ -101,9 +101,9 @@ public class Postfix {
 						} else {
 							continue;
 						}
-					} else if (priority == 1 || priority == 2) {
+					} else if (priority == 1) {
 						if (operator.pointer != null) {
-							if (priority == 3 || priority == 4) {
+							if (priority == 2) {
 								continue;
 							} else if (operator.value
 									.equals(operator.pointer.value)) {
@@ -132,14 +132,10 @@ public class Postfix {
 	}
 	
 	public int findPriority(String operator){
-		if (operator == "*") {
+		if (operator == "*" || operator == "/") {
 			return 1;
-		}else if (operator == "/"){
+		}else if (operator == "+" || operator == "-"){
 			return 2;
-		}else if (operator == "+"){
-			return 3;
-		}else if (operator == "-"){
-			return 4;
 		}
 		return 0;
 	}
