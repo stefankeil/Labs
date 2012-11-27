@@ -89,9 +89,7 @@ public class UserInterface implements ActionListener {
 		addButton(buttonPanel, "2");
 		addButton(buttonPanel, "1");
 		addButton(buttonPanel, "0");
-		addButton(buttonPanel, "Pfx");
-		addButton(buttonPanel, "Infx");
-
+		
 		buttonPanelHex = new JPanel(new GridLayout(1, 6));
 		addButton(buttonPanelHex, "A");
 		addButton(buttonPanelHex, "B");
@@ -134,25 +132,28 @@ public class UserInterface implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
-		String currentValue = display.getText();
+		//String currentValue = display.getText();
 		if (command.equals("0") || command.equals("1") || command.equals("2")
 				|| command.equals("3") || command.equals("4")
 				|| command.equals("5") || command.equals("6")
 				|| command.equals("7") || command.equals("8")
 				|| command.equals("9")) {
-			int number = Integer.parseInt(command);
-			calc.numberPressed(number);
+			//int command = Integer.parseInt(command);
+			calc.buttonPressed(command);
 
 		} else if (command.equals("A") || command.equals("B")
 				|| command.equals("C") || command.equals("D")
 				|| command.equals("E") || command.equals("F")) {
-			calc.hexPressed(command);
+			
+			int hexValue = Integer.parseInt(command, 16);
+			String displayValue = Integer.toString(hexValue);
+			calc.hexPressed(displayValue);
 
 		} else if (command.equals("+")) {
-			calc.plus();
+			calc.buttonPressed(command);
 
 		} else if (command.equals("-")) {
-			calc.minus();
+			calc.buttonPressed(command);
 
 		} else if (command.equals("=")) {
 			calc.equals();
@@ -161,37 +162,18 @@ public class UserInterface implements ActionListener {
 			calc.clear();
 
 		} else if (command.equals("/")) {
-			calc.divide();
+			calc.buttonPressed(command);
 
 		} else if (command.equals("*")) {
-			calc.multiply();
+			calc.buttonPressed(command);
 
 		} else if (command.equals("Hex")) {
 			buttonPanelHex.setVisible(true);
 
 		} else if (command.equals("Deg")) {
 			buttonPanelHex.setVisible(false);
-		} else if (command.equals("Pfx")) {
-			try {
-				String result = evaluater.evaluate(currentValue);
-				display.setText(result);
-			} catch (UnderflowException e) {
-				JOptionPane.showMessageDialog(frame, "Der Stack ist leer");
-			} catch (IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(frame, "Jede Zahl und jeder Operator muss durch ein Leerzeichen getrennt sein.");
-			}
-		} else if (command.equals("Infx")) {
-			try {
-				String result = evaluater.infixToPostfix(currentValue);
-				display.setText(result);
-			} catch (IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(frame, "Jede Zahl und jeder Operator muss durch ein Leerzeichen getrennt sein.");
-			} catch (UnderflowException e) {
-				JOptionPane.showMessageDialog(frame, "Der Stack ist leer");
-			} catch (FormatException e) {
-				JOptionPane.showMessageDialog(frame, "Bitte benutzen Sie nur die Operatoren / * - +");
-			}
-		}
+		} 
+		
 		// else unknown command.
 
 		redisplay();
@@ -203,11 +185,10 @@ public class UserInterface implements ActionListener {
 	 */
 	private void redisplay() {
 		if (buttonPanelHex.isVisible()) {
-			display.setText(""
-					+ Integer.toHexString((int) calc.getDisplayValue())
-							.toUpperCase());
+			display.setText(calc.getDisplayString());
+							
 		} else {
-			display.setText("" + calc.getDisplayValue());
+			display.setText(calc.getDisplayString());
 		}
 	}
 
