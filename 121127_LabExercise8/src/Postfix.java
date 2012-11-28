@@ -61,7 +61,7 @@ public class Postfix {
 		int priority;
 
 		for (int i = 0; i < stringArray.length; i++) {
-			if (stringArray[i].matches("(\\d)")) {
+			if (stringArray[i].matches("(\\d{1,2})")) {
 				numberString += stringArray[i] + " ";
 			} else {
 				if (stringArray[i].length() > 1){
