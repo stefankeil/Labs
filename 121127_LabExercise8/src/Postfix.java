@@ -132,11 +132,12 @@ public class Postfix {
 	}
 	
 	public int findPriority(String operator){
-		if (operator == "*" || operator == "/") {
+		if (operator.equals("*") || operator.equals("/") ) {
 			return 1;
-		}else if (operator == "+" || operator == "-"){
+		}else if (operator.equals("+") || operator.equals("-")){
 			return 2;
-		}
+		}else{
 		return 0;
+		}
 	}
 }
