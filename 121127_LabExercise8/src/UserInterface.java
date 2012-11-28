@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -11,12 +12,12 @@ import javax.swing.border.*;
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
  */
-public class UserInterface implements ActionListener {
+public class UserInterface extends JFrame implements ActionListener {
 	private CalcEngine calc;
 	private Postfix evaluater;
 	private boolean showingAuthor;
 
-	private JFrame frame;
+	//private JFrame frame;
 	private JTextField display;
 	private JTextField stringDisplay;
 	private JLabel status;
@@ -32,26 +33,18 @@ public class UserInterface implements ActionListener {
 		calc = engine;
 		showingAuthor = true;
 		makeFrame();
-		frame.setVisible(true);
-	}
-
-	/**
-	 * Set the visibility of the interface.
-	 * 
-	 * @param visible
-	 *            true if the interface is to be made visible, false otherwise.
-	 */
-	public void setVisible(boolean visible) {
-		frame.setVisible(visible);
+		this.setVisible(true);
 	}
 
 	/**
 	 * Make the frame for the user interface.
 	 */
 	private void makeFrame() {
-		frame = new JFrame(calc.getTitle());
+		//frame = new JFrame(calc.getTitle());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 
-		JPanel contentPane = (JPanel) frame.getContentPane();
+		JPanel contentPane = (JPanel) this.getContentPane();
 		JPanel numberPane = new JPanel();
 		numberPane.setLayout(new BorderLayout());
 		contentPane.setLayout(new BorderLayout(8, 8));
@@ -105,7 +98,7 @@ public class UserInterface implements ActionListener {
 		status = new JLabel(calc.getAuthor());
 		contentPane.add(status, BorderLayout.SOUTH);
 
-		frame.pack();
+		this.pack();
 		buttonPanelHex.setVisible(false);
 	}
 
