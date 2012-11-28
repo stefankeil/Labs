@@ -66,6 +66,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		addButton(buttonPanel, "-");
 		addButton(buttonPanel, "*");
 		addButton(buttonPanel, "/");
+		addButton(buttonPanel, "^");
 		addButton(buttonPanel, "Deg");
 		addButton(buttonPanel, "Hex");
 
@@ -73,10 +74,10 @@ public class UserInterface extends JFrame implements ActionListener {
 		addButton(buttonPanel, "8");
 		addButton(buttonPanel, "7");
 		addButton(buttonPanel, "6");
-		addButton(buttonPanel, "Clear");
+		addButton(buttonPanel, "5");
 		addButton(buttonPanel, "=");
 
-		addButton(buttonPanel, "5");
+		addButton(buttonPanel, "Clear");
 		addButton(buttonPanel, "4");
 		addButton(buttonPanel, "3");
 		addButton(buttonPanel, "2");
@@ -158,6 +159,9 @@ public class UserInterface extends JFrame implements ActionListener {
 			calc.buttonPressed(command);
 
 		} else if (command.equals("*")) {
+			calc.buttonPressed(command);
+
+		} else if (command.equals("^")) {
 			calc.buttonPressed(command);
 
 		} else if (command.equals("Hex")) {
