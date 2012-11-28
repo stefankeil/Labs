@@ -13,6 +13,7 @@ public class CalcEngine {
 	private Boolean hexon;
 	//private String result;
 	private Postfix evaluater;
+	private String result;
 	
 
 	public CalcEngine() {
@@ -24,9 +25,9 @@ public class CalcEngine {
 	 * @return The value that should currently be displayed on the calculator
 	 *         display.
 	 */
-//	public double getDisplayValue() {
-//		return displayValue;
-//	}
+	public String getDisplayValue() {
+		return result;
+	}
 
 	public String getDisplayString() {
 		return displayString;
@@ -75,7 +76,7 @@ public class CalcEngine {
 			}
 		}else{
 		try {
-			String result = evaluater.infixToPostfix(displayString);
+			result = evaluater.infixToPostfix(displayString);
 			displayString = evaluater.evaluate(result);
 			displayString = hexResult(displayString);
 		} catch (IllegalArgumentException e) {

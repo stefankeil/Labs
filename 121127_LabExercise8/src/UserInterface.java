@@ -186,9 +186,12 @@ public class UserInterface implements ActionListener {
 	private void redisplay() {
 		if (buttonPanelHex.isVisible()) {
 			display.setText(calc.getDisplayString());
+			stringDisplay.setText(calc.getDisplayValue());
 							
 		} else {
 			display.setText(calc.getDisplayString());
+			stringDisplay.setText(calc.getDisplayValue());
+
 		}
 	}
 
