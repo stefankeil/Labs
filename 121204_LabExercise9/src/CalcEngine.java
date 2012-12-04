@@ -4,36 +4,29 @@
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
  */
+import java.util.TreeSet;
 
 public class CalcEngine {
 
-	//private int displayValue;
-	private String displayString= "";
-	//private String hexDisplayString;
-	private Boolean hexon;
-	//private String result;
-	private Postfix evaluater;
-	private String result;
-	
+	private TreeSet<Integer> result;
+	public TreeSet<Integer> currentSet = new TreeSet<Integer>();
+	public TreeSet<Integer> set = new TreeSet<Integer>();
+	public String operator;
+	public String displayString;
 
 	public CalcEngine() {
-		evaluater = new Postfix();
-		clear();
+		clear(); 
 	}
 
 	/**
 	 * @return The value that should currently be displayed on the calculator
 	 *         display.
 	 */
-	public String getDisplayValue() {
+	public TreeSet<Integer> getDisplayValue() {
 		return result;
 	}
 
 	public String getDisplayString() {
-		return displayString;
-	}
-	public String getHexDisplayString() {
-		displayString = hexResult(displayString);
 		return displayString;
 	}
 
@@ -44,59 +37,43 @@ public class CalcEngine {
 	 * @param number
 	 *            The number pressed on the calculator.
 	 */
-	public void buttonPressed(String inputString) {
-		if (inputString.matches("(\\d)")){
-			displayString = displayString  + inputString;
-		}else{
-			displayString = displayString  + " " + inputString + " ";
-		}
-	}
 
-	public void hexPressed(String hexNumber) {
-		
-			displayString = displayString  + hexNumber;
-			hexon = true;
+	public void addToSet(int number){
+		currentSet.add(number);
+	}
+	
+	public void buttonPressed(String command){
+		set = currentSet;
+		currentSet.clear();
+		operator = command;
 	}
 
 	
 	public void equals() {
-		if(hexon = false){
-			try {
-				result = evaluater.infixToPostfix(displayString);
-				displayString = evaluater.evaluate(result);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UnderflowException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (FormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else{
-		try {
-			result = evaluater.infixToPostfix(displayString);
-			displayString = evaluater.evaluate(result);
-			displayString = hexResult(displayString);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnderflowException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		switch(operator.charAt(0)){
+		case '∩':
+			set.retainAll(currentSet);
+			result = set;
+			break;
+		case '∪':
+			set.addAll(currentSet);
+			result = set;
+			break;
+		case '\\':
+			set.removeAll(currentSet);
+			result = set;
 		}
-		}	
 	}
-	public String hexResult(String x){
-		int hexValue = Integer.parseInt(x, 16);
-		displayString = Integer.toHexString(hexValue);
-		return displayString;
-		
+	
+	public void numberSet(){
+		currentSet.size();
 	}
+//	public TreeSet<Integer> onlyEqual(TreeSet<Integer> set){
+//		for ()
+//		if (!currentSet.add(i)){
+//			
+//		}
+//	}
 
 	public void clear() {
 		displayString = "";
