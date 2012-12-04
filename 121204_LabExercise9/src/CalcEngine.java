@@ -39,13 +39,13 @@ public class CalcEngine {
 	 */
 
 	public void addToSet(int number){
-		displayString = displayString  + number;
+		displayString = displayString  + number + " ";
 		currentSet.add(number);
 		System.out.println(currentSet);
 	}
 	
 	public void buttonPressed(String command){
-		displayString = displayString  + command;
+		displayString = "[ " + displayString + "] " + command + " [ ";
 		set.addAll(currentSet);
 		currentSet.clear();
 		System.out.println(currentSet);
@@ -61,24 +61,21 @@ public class CalcEngine {
 			System.out.println(currentSet);
 			set.retainAll(currentSet);
 			result = set;
-			System.out.println(result);
+			displayString = displayString +"]";
 			break;
 		case '∪':
 			set.addAll(currentSet);
 			result = set;
+			displayString = displayString +"]";
 			break;
 		case '\\':
 			set.removeAll(currentSet);
 			result = set;
+			displayString = displayString +"]";
 		}
 	}
 	
 	public int numberSet(){
-//		System.out.println(currentSet.size());
-//		System.out.println(result);
-//		result.add(2);
-//		//result.add(currentSet.size());
-//		System.out.println(result);
 		int numberOfSetElements = currentSet.size();
 		return numberOfSetElements;
 		
@@ -88,7 +85,7 @@ public class CalcEngine {
 		displayString = "";
 		set.clear();
 		currentSet.clear();
-//		result.clear();
+		//result = null;
 	}
 
 	/**

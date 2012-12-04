@@ -137,11 +137,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		} else if (command.equals("PUSH")) {
 			int st = calc.numberSet();
 			JOptionPane.showMessageDialog(null,"Die Anzahl der Elemente beträgt: "+ st,"Eig. des aktuellen Sets",JOptionPane.PLAIN_MESSAGE);
-                    
-                                                           
-                    
-
-
 		}
 
 		// else unknown command.
