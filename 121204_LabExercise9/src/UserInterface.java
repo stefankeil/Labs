@@ -61,7 +61,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		addButton(buttonPanel, "\\");
 		addButton(buttonPanel, "PUSH");
 		addButton(buttonPanel, ",");
-		 addButton(buttonPanel, "=");
+		addButton(buttonPanel, "=");
 
 		addButton(buttonPanel, "9");
 		addButton(buttonPanel, "8");
@@ -135,7 +135,12 @@ public class UserInterface extends JFrame implements ActionListener {
 			calc.buttonPressed(command);
 
 		} else if (command.equals("PUSH")) {
-			calc.numberSet();
+			int st = calc.numberSet();
+			JOptionPane.showMessageDialog(null,"Die Anzahl der Elemente beträgt: "+ st,"Eig. des aktuellen Sets",JOptionPane.PLAIN_MESSAGE);
+                    
+                                                           
+                    
+
 
 		}
 

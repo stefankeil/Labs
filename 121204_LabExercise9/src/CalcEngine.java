@@ -73,12 +73,15 @@ public class CalcEngine {
 		}
 	}
 	
-	public void numberSet(){
-		System.out.println(currentSet.size());
-		System.out.println(result);
-		result.add(2);
-		//result.add(currentSet.size());
-		System.out.println(result);
+	public int numberSet(){
+//		System.out.println(currentSet.size());
+//		System.out.println(result);
+//		result.add(2);
+//		//result.add(currentSet.size());
+//		System.out.println(result);
+		int numberOfSetElements = currentSet.size();
+		return numberOfSetElements;
+		
 	}
 
 	public void clear() {
