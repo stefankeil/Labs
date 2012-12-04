@@ -39,12 +39,17 @@ public class CalcEngine {
 	 */
 
 	public void addToSet(int number){
+		displayString = displayString  + number;
 		currentSet.add(number);
+		System.out.println(currentSet);
 	}
 	
 	public void buttonPressed(String command){
-		set = currentSet;
+		displayString = displayString  + command;
+		set.addAll(currentSet);
 		currentSet.clear();
+		System.out.println(currentSet);
+		System.out.println(set);
 		operator = command;
 	}
 
@@ -52,8 +57,11 @@ public class CalcEngine {
 	public void equals() {
 		switch(operator.charAt(0)){
 		case '∩':
+			System.out.println(set);
+			System.out.println(currentSet);
 			set.retainAll(currentSet);
 			result = set;
+			System.out.println(result);
 			break;
 		case '∪':
 			set.addAll(currentSet);
@@ -66,17 +74,18 @@ public class CalcEngine {
 	}
 	
 	public void numberSet(){
-		currentSet.size();
+		System.out.println(currentSet.size());
+		System.out.println(result);
+		result.add(2);
+		//result.add(currentSet.size());
+		System.out.println(result);
 	}
-//	public TreeSet<Integer> onlyEqual(TreeSet<Integer> set){
-//		for ()
-//		if (!currentSet.add(i)){
-//			
-//		}
-//	}
 
 	public void clear() {
 		displayString = "";
+		set.clear();
+		currentSet.clear();
+//		result.clear();
 	}
 
 	/**
