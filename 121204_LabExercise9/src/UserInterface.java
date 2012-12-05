@@ -149,12 +149,8 @@ public class UserInterface extends JFrame implements ActionListener {
 	 * Update the interface display to show the current value of the calculator.
 	 */
 	private void redisplay() {
-		if (calc.getDisplayValue() != null){
 		display.setText(calc.getDisplayValue().toString());
 		stringDisplay.setText(calc.getDisplayString());
-		}else{
-			stringDisplay.setText(calc.getDisplayString());
-		}
 	}
 
 	/**

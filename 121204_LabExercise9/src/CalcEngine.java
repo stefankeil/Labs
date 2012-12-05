@@ -41,15 +41,16 @@ public class CalcEngine {
 	public void addToSet(int number){
 		displayString = displayString  + number + " ";
 		currentSet.add(number);
-		System.out.println(currentSet);
+		result = currentSet;
+//		System.out.println(currentSet);
 	}
 	
 	public void buttonPressed(String command){
 		displayString = "[ " + displayString + "] " + command + " [ ";
 		set.addAll(currentSet);
 		currentSet.clear();
-		System.out.println(currentSet);
-		System.out.println(set);
+//		System.out.println(currentSet);
+//		System.out.println(set);
 		operator = command;
 	}
 
@@ -57,18 +58,21 @@ public class CalcEngine {
 	public void equals() {
 		switch(operator.charAt(0)){
 		case '∩':
-			System.out.println(set);
-			System.out.println(currentSet);
+//			System.out.println(set);
+//			System.out.println(currentSet);
+			result = null;
 			set.retainAll(currentSet);
 			result = set;
 			displayString = displayString +"]";
 			break;
 		case '∪':
+			result = null;
 			set.addAll(currentSet);
 			result = set;
 			displayString = displayString +"]";
 			break;
 		case '\\':
+			result = null;
 			set.removeAll(currentSet);
 			result = set;
 			displayString = displayString +"]";
@@ -85,7 +89,6 @@ public class CalcEngine {
 		displayString = "";
 		set.clear();
 		currentSet.clear();
-		//result = null;
 	}
 
 	/**
