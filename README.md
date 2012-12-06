@@ -3,7 +3,7 @@ Labs
 
 Laboratory Exercises for Infoomatics 2:
 
-Exercise 0 : Implementing CRC cards
+Exercise 0 : Implementing CRC cards \n
 Exercise 1 : Chatterbox
 Exercise 2 : Histogram 
 Exercise 3 : Execution Times 
