@@ -9,7 +9,8 @@ public class Triangle {
 	private String color;
 	private boolean isVisible;
 	private Canvas canvas = new Canvas(screenWidth, screenHeigth, Color.white);
-//	private int step;
+	Graphics g;
+    Point a1,b1,c1, a2,b2,c2, a3,b3,c3;
 
 	public int getScreenWidth() {
 		return screenWidth;
@@ -58,48 +59,52 @@ public class Triangle {
 	}
 
 	public void draw(int xPointA, int xPointB, int xPointC, int yPointA, int yPointB, int yPointC) {
-		if (isVisible) {
-			int[] xPoints = { xPointA, xPointB, xPointC };
-			int[] yPoints = { yPointA, yPointB, yPointC };
-			canvas.draw(this, color, new Polygon(xPoints, yPoints, 3));
-			
-			int[] newXPoints = { (xPoints[0] + xPoints[1]) / 2, (xPoints[1] + xPoints[2]) / 2, (xPoints[2] + xPoints[0]) / 2 };
-			int[] newYPoints = { (yPoints[0] + yPoints[1]) / 2, (yPoints[1] + yPoints[2]) / 2, (yPoints[2] + yPoints[0]) / 2 };
-			changeColor("Black");
-			canvas.draw(this, color, new Polygon(newXPoints, newYPoints, 3));
-			
-			drawRecursive(newXPoints[0], newXPoints[1], newXPoints[2], newYPoints[0], newYPoints[1], newYPoints[2], xPoints[0], xPoints[1], xPoints[2], yPoints[0], yPoints[1], yPoints[2], 2 );
-		}
+		int[] xPoints = { xPointA, xPointB, xPointC };
+		int[] yPoints = { yPointA, yPointB, yPointC };
+		canvas.draw(this, color, new Polygon(xPoints, yPoints, 3));
+
+        drawRecursive(new Point(xPointA,yPointA),new Point(xPointB, yPointB),new Point(xPointC, yPointC), 5);
 	}
 
-	public int drawRecursive(int xPointA, int xPointB, int xPointC, int yPointA, int yPointB, int yPointC, int oldXPointA, int oldXPointB, int oldXPointC, int oldYPointA, int oldYPointB, int oldYPointC, int step) {
+	public int drawRecursive(Point a, Point b, Point c, int step) {
+		
 		if (step == 0){
 			return 1;
 		}else {
 			
-			int[] newTopXPoints = {(oldXPointA + xPointA)/2, (xPointA + xPointC) /2, (xPointC + oldXPointA) /2};
-			int[] newTopYPoints = {(oldYPointA + yPointA)/2, (yPointA + yPointC) /2, (yPointC + oldYPointA) /2};
-			
-			changeColor("blue");
-			
-			canvas.draw(this, color, new Polygon(newTopXPoints, newTopYPoints, 3));
-			drawRecursive(newTopXPoints[0], newTopXPoints[1], newTopXPoints[2], newTopYPoints[0], newTopYPoints[1], newTopYPoints[2], oldXPointA, xPointB, xPointC, oldYPointA, yPointB, yPointC, step - 1);
-			
-			int[] newRightXPoints = {(xPointA + oldXPointB) /2, (oldXPointB + xPointB) /2, (xPointB + xPointA) /2};
-			int[] newRightYPoints = {(yPointA + oldYPointB) /2, (oldYPointB + yPointB) /2, (yPointB + yPointA) /2};
-			
-			changeColor("red");
-			
-			canvas.draw(this, color, new Polygon(newRightXPoints, newRightYPoints, 3));
-			drawRecursive(newRightXPoints[0], newRightXPoints[1], newRightXPoints[2],  newRightYPoints[0], newRightYPoints[1], newRightYPoints[2], xPointA, oldXPointB, xPointC, yPointA, oldYPointB, yPointC, step - 1);
+			// In das übergebene Dreieck, wird ein auf dem Kopf stehendes Dreieck eingefügt
+	        int xPoints[] = {(a.x + b.x)/2, (b.x+c.x)/2, (a.x+c.x)/2};
+	        int yPoints[] = {(a.y + b.y)/2, (b.y+c.y)/2, (a.y+c.y)/2};
+	        
+	        if (step == 1){
+	        	changeColor("black");
+	        }else if (step == 2){
+	        	changeColor("white");
+	        }else if (step == 3){
+	        	changeColor("blue");
+	        }else if (step == 4){
+	        	changeColor("green");
+	        }else if (step == 5){
+	        	changeColor("red");
+	        }
 
-			int[] newLeftXPoints = {(xPointC + xPointB) /2, (xPointB + oldXPointC) /2, (oldXPointC + xPointC) /2};
-			int[] newLeftYPoints = {(yPointC + yPointB) /2, (yPointB + oldYPointC) /2, (oldYPointC + yPointC) /2};
-			
-			changeColor("green");
-			
-			canvas.draw(this, color, new Polygon(newLeftXPoints, newLeftYPoints, 3));
-			drawRecursive(newLeftXPoints[0], newLeftXPoints[1], newLeftXPoints[2], newLeftYPoints[0], newLeftYPoints[1], newLeftYPoints[2], xPointA, xPointB, oldYPointC, yPointA, yPointB, oldYPointC, step - 1);
+			canvas.draw(this, color, new Polygon(xPoints, yPoints, 3));
+
+	        // 3 neue Dreiecke bestimmen
+	        a1 = a;
+	        b1 = new Point(xPoints[0], yPoints[0]);
+	        c1 = new Point(xPoints[2], yPoints[2]);
+	        drawRecursive(a1, b1, c1, step - 1);
+
+	        a2 = new Point(xPoints[0], yPoints[0]);
+	        b2 = b;
+	        c2 = new Point(xPoints[1], yPoints[1]);
+	        drawRecursive(a2, b2, c2, step - 1);
+
+	        a3 = new Point(xPoints[2], yPoints[2]);
+	        b3 = new Point(xPoints[1], yPoints[1]);
+	        c3 = c;
+	        drawRecursive(a3, b3, c3, step - 1);
 		
 		}
 		return 2;
