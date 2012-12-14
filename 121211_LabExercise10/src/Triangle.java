@@ -72,7 +72,6 @@ public class Triangle {
 			return 1;
 		}else {
 			
-			// In das übergebene Dreieck, wird ein auf dem Kopf stehendes Dreieck eingefügt
 	        int xPoints[] = {(a.x + b.x)/2, (b.x+c.x)/2, (a.x+c.x)/2};
 	        int yPoints[] = {(a.y + b.y)/2, (b.y+c.y)/2, (a.y+c.y)/2};
 	        
@@ -90,7 +89,6 @@ public class Triangle {
 
 			canvas.draw(this, color, new Polygon(xPoints, yPoints, 3));
 
-	        // 3 neue Dreiecke bestimmen
 	        a1 = a;
 	        b1 = new Point(xPoints[0], yPoints[0]);
 	        c1 = new Point(xPoints[2], yPoints[2]);
