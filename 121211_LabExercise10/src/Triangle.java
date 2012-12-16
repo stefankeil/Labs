@@ -1,16 +1,20 @@
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
-public class Triangle {
-	private int screenWidth = 1680;
-	private int screenHeigth = 600;
-	private int length;
+public class Triangle implements ComponentListener{
+	
+	
 	private int xPosition;
 	private int yPosition;
 	private String color;
 	private boolean isVisible;
-	private Canvas canvas = new Canvas(screenWidth, screenHeigth, Color.white);
+	private Canvas canvas = new Canvas(400, 400, Color.white);
+	private int screenWidth = canvas.getWidth()-25;
+	private int screenHeigth = canvas.getHeight()-25;
 	Graphics g;
     Point a1,b1,c1, a2,b2,c2, a3,b3,c3;
+    
 
 	public int getScreenWidth() {
 		return screenWidth;
@@ -48,6 +52,7 @@ public class Triangle {
 	 * Create a new triangle at default position with default color.
 	 */
 	public Triangle() {
+		canvas.getFrame().addComponentListener(this);
 		xPosition = 0;
 		yPosition = 0;
 		color = "magenta";
@@ -106,5 +111,34 @@ public class Triangle {
 		
 		}
 		return 2;
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentResized(ComponentEvent arg0) {
+		screenWidth = canvas.getWidth()-25;
+		screenHeigth = canvas.getHeight()-25;
+		canvas.setSize(canvas.getWidth(),canvas.getHeight());
+		canvas.setVisible(true);
+		color = "magenta";
+		draw(getxPosition() + getScreenWidth() / 2, (getScreenWidth() - getScreenHeigth()) / 2, ((getScreenWidth() - getScreenHeigth()) / 2) + getScreenHeigth(), getyPosition(), getScreenHeigth(), getScreenHeigth() );;
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

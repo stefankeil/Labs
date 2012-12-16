@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Canvas {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private CanvasPane canvas;
 	private Graphics2D graphic;
 	private Color backgroundColour;
@@ -17,6 +17,7 @@ public class Canvas {
 		frame = new JFrame();
 		canvas = new CanvasPane();
 		frame.setContentPane(canvas);
+		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		canvas.setPreferredSize(new Dimension(width, height));
 		backgroundColour = bgColour;
 		frame.pack();
@@ -26,14 +27,14 @@ public class Canvas {
 	}
 
 	public void setVisible(boolean visible) {
-		if (graphic == null) {
+		
 			Dimension size = canvas.getSize();
 			canvasImage = canvas.createImage(size.width, size.height);
 			graphic = (Graphics2D) canvasImage.getGraphics();
 			graphic.setColor(backgroundColour);
 			graphic.fillRect(0, 0, size.width, size.height);
 			graphic.setColor(Color.black);
-		}
+		
 		frame.setVisible(visible);
 	}
 
@@ -69,7 +70,7 @@ public class Canvas {
 		canvas.repaint();
 	}
 
-	private void erase() {
+	public void erase() {
 		Color original = graphic.getColor();
 		graphic.setColor(backgroundColour);
 		Dimension size = canvas.getSize();
@@ -97,5 +98,21 @@ public class Canvas {
 			graphic.fill(shape);
 		}
 	}
+	public static int getHeight(){
+		return frame.getHeight();
+	}
+	public static int getWidth(){
+		return frame.getWidth();
+	}
+	public Component getFrame() {
+		return  frame;
+	}
+	public Dimension getCanvasSize() {
+		return canvas.getSize();
+	}
 
+	public void setSize(int width, int height) {
+		canvas.setSize(width, height);
+		
+	}
 }
