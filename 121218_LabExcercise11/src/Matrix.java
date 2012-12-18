@@ -16,13 +16,13 @@ public class Matrix {
 		this.weightOfEdges = weight;
 	}
 	
-	public void fillMatrix(int [] weightOfEdges){
-		int count = 0;
-		for (int i = 0; i < this.row; i++){
-			for (int j = 0; j < this.collum; j++){
-				this.matrixArray[i][j]=weightOfEdges[count];
-				count++;
-			}
-		}
+	public void addVertices(String vertices){
+//		toDo: vertices add to nameVertices;
+		this.row = nameVertices.length;
+		this.collum = nameVertices.length;
+	}
+	
+	public void addWeight(int weight){
+		matrixArray[row][collum] = weight;
 	}
 }
