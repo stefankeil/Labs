@@ -7,6 +7,7 @@ public class Matrix {
 	int collum = nameVertices.length;
 	int [] weightOfEdges;
 	int [] [] matrixArray;
+	int i;
 	
 	public Matrix(int row, int edges, String [] nameVertices, int [] weight) {
 		this.row = row;
@@ -17,9 +18,10 @@ public class Matrix {
 	}
 	
 	public void addVertices(String vertices){
-//		toDo: vertices add to nameVertices;
+		nameVertices [i] = vertices;
 		this.row = nameVertices.length;
 		this.collum = nameVertices.length;
+		i++;
 	}
 	
 	public void addWeight(int weight){

@@ -2,9 +2,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-
-
-
 public class Random_weighted_graph {
 	
 	private Random randomnumber = new Random();
