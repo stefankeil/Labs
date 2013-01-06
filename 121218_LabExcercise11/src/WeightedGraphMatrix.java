@@ -65,4 +65,10 @@ public class WeightedGraphMatrix {
 		sb.insert(0, "Matrix with " + size + " vertices and " + edges + " edges.\n");
 		return sb.toString();
 	}
+	
+	private void cheapestPath(String vertexA, String vertexB) throws Exception{
+		int indexVertexA = vertexIndex(vertexA);
+		int indexVertexB = vertexIndex(vertexB);
+		
+	}
 }
