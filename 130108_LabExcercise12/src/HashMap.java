@@ -1,39 +1,39 @@
-import java.util.ArrayList;
-import java.util.Map;
-
-
 public class HashMap {
 
-	int indexKey;
-	String[][] scrabbleValue = new String[1208][20];
-	int position = 0;
-	
-	
-	
-	public HashMap() {
-		indexKey = 0;
-	}
-	
+	String[][] scrabbleValues = new String[1500][1000];
+
 	public void setWordInMap(int key, String word) {
-		while (scrabbleValue[key][position] != null) {
+		int position = 0;
+		while (scrabbleValues[key][position] != null) {
 			position++;
 		}
-		scrabbleValue[key][position] = word;
+		scrabbleValues[key][position] = word;
+	}
+
+	public String[] getWordListOnPosition(int hashCode) throws Exception {
+		int position = 0;
+		
+		while (scrabbleValues[hashCode][position] != null) {
+			position++;
+		}
+		
+		String[] wordArray = new String[position];
+		
+		for (int i = 0; i < position; i++){
+			wordArray[i] = scrabbleValues[hashCode][i];
+		}
+		
+		return wordArray;
 	}
 	
-	public String[] getWordListOnPosition(int hashCode) throws Exception {
-		int size = 0;
-		String[] wordArray = null;
-		
-		while (scrabbleValue[hashCode][size] != null) {
-			size++;
-			wordArray = new String[size];
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0; i < scrabbleValues.length; i ++) {
+			for (int j = 0; j < scrabbleValues[i].length; j++) {
+				sb.append(scrabbleValues[i][j]).append(" ");
+			}
+			sb.append("\n");
 		}
-		
-		for (int i = 0; i < size; i++){
-			wordArray[i] = scrabbleValue[hashCode][i];
-		}
-		
-		throw new Exception("There is no word on this position");
+		return sb.toString();
 	}
 }
