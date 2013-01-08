@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 
 public class Reader {
-	private static String  file_name = "/Users/stefankeil/Documents/Workspace/Labs/130108_LabExcercise12/TWL06.txt";;
+	private static String  file_name = "/Users/Fee/Documents/Uni/HTW/Informatik2/Lab/130108_LabExcercise12/TWL06.txt";;
 	private static Hashing hasher = new Hashing();
 	private static HashMap map = new HashMap();
 	public static void readFromAFile()
@@ -29,9 +29,9 @@ public class Reader {
 	  }
 	  //Close the input stream
 	  in.close();
-	    }catch (Exception e){//Catch exception if any
-	  System.err.println("Error: " + e.getMessage());
-	  }
+	    }catch (Exception e){//Catch exception if any}
+	    	System.out.println("test");
+	    }
 	  }
 	}
 

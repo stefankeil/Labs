@@ -9,6 +9,5 @@ public class ScrabbleCheater {
 		String wordArray[] = hashMap.getWordListOnPosition(hashInteger);
 		return wordArray;
 	}
-	
 
 }
