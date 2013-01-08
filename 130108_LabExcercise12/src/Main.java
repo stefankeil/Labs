@@ -10,6 +10,9 @@ public class Main {
 		Hashing hash = new Hashing ();
 		int test= hash.createHashcode("susi");
 		System.out.println(test);
+		Reader reader = new Reader();
+		reader.readFromAFile();
+		
 	}
 
 }
