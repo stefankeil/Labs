@@ -10,19 +10,19 @@ public class Reader {
 		try {
 			// Open the file that is the first
 			FileInputStream fstream = new FileInputStream(fileName);
-			
+
 			// Get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
-			
+
 			// Read File Line By Line
 			while ((strLine = br.readLine()) != null) {
 				// uses the hashcode of the word as index in the hashmap
 				int hashcode = Hashing.createHashcode(strLine);
-				map.setWordInMap(hashcode, strLine);
+				map.setWordInMap(hashcode, strLine.toLowerCase());
 			}
-			
+
 			// Close the input stream
 			in.close();
 		} catch (Exception e) {// Catch exception if any}
