@@ -6,7 +6,7 @@ public class Hashing {
 	public static int createHashcode(String string) throws Exception{
 		
 		int stringvalue = convertString(string);
-		int result = stringvalue%1213; 
+		int result = (stringvalue%1427); 
 	
 		return result;
 	}
@@ -18,8 +18,8 @@ public class Hashing {
 	public static int convertString(String string){
 		String thisString = string.toLowerCase();
 		int sum = 0;
-		for (int i=0; i < thisString.length();i++)
-			sum += thisString.charAt(i);
+		for (int i=0; i < thisString.length(); i++)
+			sum += 601 * thisString.charAt(i);
 		return sum;
 	}
 }
