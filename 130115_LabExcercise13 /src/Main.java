@@ -10,15 +10,14 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		cheater = new ScrabbleCheater("/Users/Fee/Documents/Uni/HTW/Informatik2/Lab/130108_LabExcercise12/TWL06.txt");
 
-		String word = generateRandomString(6);
-		ScrabbleCheater.permute("", "FLOWERS");
+		String word = generateRandomString(7);
+		ScrabbleCheater.permute("", word);
 		
 		Iterator it = ScrabbleCheater.permutationen.iterator();
 		
 		while (it.hasNext()){
 			String element = (String) it.next();
 			String words[] = ScrabbleCheater.getWords(element);
-//			System.out.println("Set Word: " + element);
 			for (int i = 0; i < words.length; i++){
 				if (element.toLowerCase().equals(words[i])){
 					System.out.println(element);

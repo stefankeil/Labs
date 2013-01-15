@@ -34,20 +34,13 @@ public class ScrabbleCheater {
 			throws Exception {
 
 		// Base Case
-		if (endingString.length() <= 1) {
-			
-			permutationen.add(beginningString + endingString);
-			
-			if (beginningString.length() > 1) {
-				permute("", beginningString);
-			}
-		} else {
+		if (endingString.length() > 1) {
+			permutationen.add(endingString);
 			for (int i = 0; i < endingString.length(); i++) {
 				try {
 					// newString will be the new endingString
 					// Substring make a substring from 0 to i and from i + 1
-					String newString = endingString.substring(0, i)
-							+ endingString.substring(i + 1);
+					String newString = endingString.substring(0, i) + endingString.substring(i + 1);
 					permute(beginningString + endingString.charAt(i), newString);
 				} catch (StringIndexOutOfBoundsException exception) {
 					exception.printStackTrace();
