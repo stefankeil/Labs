@@ -10,8 +10,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		cheater = new ScrabbleCheater("/Users/Fee/Documents/Uni/HTW/Informatik2/Lab/130108_LabExcercise12/TWL06.txt");
 
-		String word = generateRandomString(7);
-		ScrabbleCheater.permute("", word);
+		String word = generateRandomString(6);
+		ScrabbleCheater.permute("", "FLOWERS");
 		
 		Iterator it = ScrabbleCheater.permutationen.iterator();
 		
@@ -35,9 +35,7 @@ public class Main {
 		StringBuilder sb = new StringBuilder(len);
 		for (int i = 0; i < len; i++) {
 			sb.append(AB.charAt(rnd.nextInt(AB.length())));
-
 		}
-//		System.out.println("String" + sb.toString());
 		return sb.toString();
 
 	}

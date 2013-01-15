@@ -4,7 +4,7 @@ import java.util.Set;
 public class ScrabbleCheater {
 
 	static HashMap hashMap;
-	public static Set permutationen = new HashSet<String>();
+	public static Set<String> permutationen = new HashSet<String>();
 
 	public ScrabbleCheater(String fileName) throws Exception {
 		hashMap = Reader.readMapFromFile(fileName);
