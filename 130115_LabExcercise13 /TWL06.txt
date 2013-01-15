@@ -1,5 +1,3 @@
-java
-vaja
 AA
 AAH
 AAHED

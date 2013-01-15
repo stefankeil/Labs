@@ -1,13 +1,17 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public class ScrabbleCheater {
 
-	HashMap hashMap;
+	static HashMap hashMap;
+	public static Set permutationen = new HashSet<String>();
 
 	public ScrabbleCheater(String fileName) throws Exception {
 		hashMap = Reader.readMapFromFile(fileName);
 		hashMap.figures();
 	}
 
-	public String[] getWords(String string) throws Exception {
+	public static String[] getWords(String string) throws Exception {
 		int hashInteger = Hashing.createHashcode(string);
 		return hashMap.getWordListOnPosition(hashInteger);
 	}
@@ -20,29 +24,35 @@ public class ScrabbleCheater {
 		return sorted;
 	}
 
-	public boolean isPermutation(String a, String b) {
-		String sortedA = sortByAlphabet(a);
-		String sortedB = sortByAlphabet(b);
+	public static boolean isPermutation(String a, String b) {
+		String sortedA = sortByAlphabet(a).toLowerCase();
+		String sortedB = sortByAlphabet(b).toLowerCase();
 		return (sortedA.compareTo(sortedB) == 0);
 	}
 
-	public static void permute(String beginningString, String endingString) {
-		//Base Case
+	public static void permute(String beginningString, String endingString)
+			throws Exception {
+
+		// Base Case
 		if (endingString.length() <= 1) {
-			System.out.println(beginningString + endingString);
+			
+			permutationen.add(beginningString + endingString);
+			
+			if (beginningString.length() > 1) {
+				permute("", beginningString);
+			}
 		} else {
 			for (int i = 0; i < endingString.length(); i++) {
 				try {
-					//newString will be the new endingString
-					//Substring make a substring from 0 to i and from i + 1
-					String newString = endingString.substring(0, i) + endingString.substring(i + 1);
+					// newString will be the new endingString
+					// Substring make a substring from 0 to i and from i + 1
+					String newString = endingString.substring(0, i)
+							+ endingString.substring(i + 1);
 					permute(beginningString + endingString.charAt(i), newString);
-					
 				} catch (StringIndexOutOfBoundsException exception) {
 					exception.printStackTrace();
 				}
 			}
 		}
 	}
-
 }
